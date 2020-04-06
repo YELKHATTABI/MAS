@@ -16,7 +16,9 @@ app = Flask(__name__)
 
 def get_model():
     global model
-    model = load_model("/Users/yelkhattabi/MAS/flask_apps/model_weights/VGG16_cats_and_dogs.h5")
+    model = load_model(
+        "/Users/yelkhattabi/MAS/flask_apps/model_weights/VGG16_cats_and_dogs.h5"
+    )
     model._make_predict_function()
     print("* Model is loaded !")
 
@@ -48,7 +50,8 @@ def predict():
     response = {"prediction": {"dog": prediction[0][0], "cat": prediction[0][1]}}
     return jsonify(response)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # Serve the app with gevent
-    http_server = WSGIServer(('0.0.0.0', 5000), app)
+    http_server = WSGIServer(("0.0.0.0", 5000), app)
     http_server.serve_forever()
